@@ -1,0 +1,221 @@
+body {
+    background-color: #FAF9F8;
+    margin: 0;
+    overflow: hidden;
+    font-family: "Helvetica Neue", "Segoe UI", Calibri, Helvetica, Arial, sans-serif;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/noise.svg');
+    background-repeat: repeat;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.bokeh-wrap {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    pointer-events: none;
+    filter: blur(75px);
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+}
+
+.bokeh {
+    height: 100%;
+    width: 100%;
+}
+
+.bokeh circle {
+    animation: bokeh-rotate 6s linear infinite;
+    fill: #dbbfff;
+    opacity: 0.38;
+    transform-origin: 50%;
+}
+
+.bokeh circle:nth-child(2n) {
+    fill: #ffb8d4;
+    transform-origin: 20% 110%;
+    animation-delay: -3s;
+    animation-duration: 4.13s;
+    opacity: 0.18;
+}
+
+.bokeh circle:nth-child(3n) {
+    fill: #a8c8ff;
+    transform-origin: 70% 30%;
+    animation-delay: -1.5s;
+    animation-duration: 8s;
+    opacity: 0.5;
+}
+
+.bokeh circle:nth-child(4n) {
+    fill: #ffd4a8;
+    transform-origin: 110% 70%;
+    animation-delay: -2s;
+    animation-duration: 4.78s;
+}
+
+.bokeh circle:nth-child(5n) {
+    fill: #a8e0d8;
+    transform-origin: 30% 40%;
+}
+
+.bokeh circle:nth-child(6n) {
+    fill: #dbbfff;
+    transform-origin: -10% 80%;
+    animation-delay: -7.8s;
+}
+
+.bokeh circle:nth-child(7n) {
+    fill: #ffb8d4;
+    transform-origin: 70% -10%;
+}
+
+.bokeh circle:nth-child(8n) {
+    fill: #ffd4a8;
+    transform-origin: -30% 50%;
+    animation-delay: -2.4s;
+}
+
+.container {
+    margin: 100px auto 40px auto;
+    width: 600px;
+    text-align: center;
+}
+
+a {
+    color: #4183c4;
+    text-decoration: none;
+}
+
+h1 {
+    width: 800px;
+    position: relative;
+    left: -100px;
+    letter-spacing: 0;
+    line-height: 60px;
+    font-size: 95px;
+    font-weight: 100;
+    margin: 0 0 65px 0;
+    text-shadow: 0 1px 0 #fff;
+    animation: slide-up 0.9s ease-out both;
+}
+
+#links {
+    color: #ccc;
+    animation: slide-up 0.9s ease-out 0.25s both;
+}
+
+#links a {
+    position: relative;
+    color: #696969;
+    font-weight: 200;
+    font-size: 35px;
+    letter-spacing: 0.01em;
+    margin: 0 55px;
+    text-decoration: none;
+}
+
+#links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.6s ease;
+    opacity: 0.6;
+}
+
+#links a:hover::after {
+    width: 100%;
+}
+
+@keyframes bokeh-rotate {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 600px), (max-height: 500px) and (orientation: landscape) {
+    .bokeh-wrap {
+        filter: blur(45px);
+        transform: scale(2) translateZ(0);
+    }
+
+    .bokeh circle {
+        opacity: 0.6;
+    }
+
+    .bokeh circle:nth-child(2n) {
+        opacity: 0.4;
+    }
+
+    .bokeh circle:nth-child(3n) {
+        opacity: 0.7;
+    }
+
+    h1 {
+        width: 100%;
+        left: 0;
+        font-size: 65px;
+        margin: -50px 0 45px 0;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 100vw;
+        box-sizing: border-box;
+        padding: 0 20px;
+    }
+
+    #links a {
+        font-size: 30px;
+        margin: 0 55px;
+        display: inline-block;
+        margin-bottom: 35px;
+    }
+
+    #links a::after {
+        animation: underline-in 0.5s ease-out 0.6s both;
+    }
+
+    #links a:hover::after {
+        animation: none;
+        width: 100%;
+    }
+
+    @keyframes underline-in {
+        from { width: 0; }
+        to   { width: 100%; }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bokeh circle { animation: none; }
+    h1, #links { animation: none; opacity: 1; }
+}
